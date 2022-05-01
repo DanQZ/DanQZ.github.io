@@ -61,6 +61,14 @@ Apr 26 v0.0.7
 -Cannon damage upgrade now works properly
 -Enemies now move slower the lower hp they have
 
+Apr 30 v0.0.8
+-Fixed bouncing + infinite life boomerangs
+-Replaced jackson's stupid fucking face
+-Added damage types to projectiles (doesn't do anything yet)
+-Added tack shooter
+-Added RoF + radiation tack shooter upgrades
+-Added first targetting priority (now set as default to all targetting towers)
+
 */
 
 let lives;
@@ -151,7 +159,7 @@ function upgradeTower(parentButton, upgradeType){
 					selectedTower.damageLevel +=1;
 					break;
 				case 3: //+10% attack speed
-					selectedTower.attacksPerSecond *= 1.1;
+					selectedTower.APS *= 1.1;
 					selectedTower.atkSpeedLevel += 1;
 					break;
 				case 4: //activate triple shot darts
@@ -163,7 +171,7 @@ function upgradeTower(parentButton, upgradeType){
 				case 6: //activate explosive darts
 					selectedTower.explosive = true;
 					break;
-				case 7: //activate explosive darts
+				case 7: //+10% range
 					selectedTower.range *= 1.1;
 					selectedTower.rangeLevel += 1;
 					break;
@@ -180,7 +188,7 @@ function upgradeTower(parentButton, upgradeType){
 					selectedTower.damageLevel +=1;
 					break;
 				case 3: //+10% attack speed
-					selectedTower.attacksPerSecond *= 1.1;
+					selectedTower.APS *= 1.1;
 					selectedTower.atkSpeedLevel += 1;
 					break;
 				case 4: //activate double boomerang throwing
@@ -208,7 +216,7 @@ function upgradeTower(parentButton, upgradeType){
 					selectedTower.explosionDamageLevel += 1;
 					break;
 				case 3: //+10% attack speed
-					selectedTower.attacksPerSecond *= 1.1;
+					selectedTower.APS *= 1.1;
 					selectedTower.atkSpeedLevel += 1;
 					break;
 				case 4: //activate frags
@@ -219,6 +227,36 @@ function upgradeTower(parentButton, upgradeType){
 					break;
 			}
 		
+			break;
+		case 4://tack shooter
+			switch(upgradeType){
+				case 1: //+1 pierce
+					selectedTower.pierce += 1;
+					selectedTower.pierceLevel+=1;
+					break;
+				case 2: //+1 damage
+					selectedTower.damage +=1;
+					selectedTower.damageLevel +=1;
+					break;
+				case 3: //+10% attack speed
+					selectedTower.APS *= 1.1;
+					selectedTower.atkSpeedLevel += 1;
+					break;
+				case 4: //ring of fire
+					selectedTower.ringOfFire = true;
+					break;	
+				case 5: //radiation field
+					selectedTower.radiation = true;
+					selectedTower.tackSpeed /= 5;
+					selectedTower.pierce = Infinity;
+					selectedTower.tackLifespan = Infinity;
+					selectedTower.range = canvas.width;
+					break;
+				case 6: //+1 tacks
+					selectedTower.numOfTacks += 1;
+					selectedTower.numOfTacksLevel += 1;
+					break;
+			}
 			break;
 	}
 	
@@ -263,6 +301,10 @@ class MapCheckpoints {
 		[500, 200],
 		[100, 400],
 		];
+
+		for(let i = 0; i < this.checkPoints.length; i++){
+
+		}
 	}
 }
 
@@ -305,19 +347,6 @@ function ClosestEnemyDirection(sourcePos){
 	else
 		return -1;
 }	
-	
-function enemyInRange(tower){
-
-	for (let i = 0; i < enemies.length; i++){
- 		let distance = findDistance(tower.pos, enemies[i].pos);
-  		if(distance <= (tower.range + enemies[i].radius/2) ){
-			return true;
-  		}
-	}
-	
-	return false;
-	
-}
 
 function enemyCollision(projectile){
 	if(enemies.length == 0)
@@ -354,6 +383,9 @@ function enemyCollision(projectile){
 }
 
 function Init(){
+
+
+
 	//canvas shit
 	canvas = document.getElementById("c");
 	canvas.height = 900;
@@ -373,7 +405,7 @@ function Init(){
 	//map shit
 	map = new MapCheckpoints();
 	mapBackground = new Image();
-	mapBackground.src = "assets/map.png";
+	mapBackground.src = "assets/map1.png";
 	
 	//special effects
 	specialEffects = [];
@@ -396,8 +428,6 @@ function Init(){
 	
 	//-----------------------------------------------TOWER + MENU SHIT BELOW--------------------------------------------------------------
 	
-	towers = [];
-	numberOfTowerTypes = 3;
 	UIPathClosed = new Image();
 	UIPathClosed.src = "assets/pathClosed.png";
 	
@@ -434,7 +464,7 @@ function Init(){
 	
 	//boomerang
 	boomerangChimp = new Image();
-	boomerangChimp.src = "assets/jackson70x70.png";
+	boomerangChimp.src = "assets/daniella70x70.png";
 	boomerang = new Image();
 	boomerang.src = "assets/boomerang.png";
 	
@@ -452,10 +482,22 @@ function Init(){
 	cannonSprite.src = "assets/declan70x70.png";
 	bombSprite = new Image();
 	bombSprite.src = "assets/bombSprite.png";
+
 	UIFragBombsImage = new Image();
 	UIFragBombsImage.src = "assets/fragBombButton.png";
 	UIClusterBombsImage = new Image();
 	UIClusterBombsImage.src = "assets/clusterBombButton.png";
+
+	//tack shooter
+	tackShooterSprite = new Image();
+	tackShooterSprite.src = "assets/thomas50x50.png";
+	UI1TacksImage = new Image();
+	UI1TacksImage.src = "assets/UI+1TacksButton.png";
+	UIRingOfFireImage = new Image();
+	UIRingOfFireImage.src = "assets/UIRoFButton.png";
+	UIRadiationImage = new Image();
+	UIRadiationImage.src = "assets/UIRadiationButton.png";
+
 
 
 	//---------------------------------------------END OF TOWER SHIT--------------------------------------------
@@ -464,19 +506,38 @@ function Init(){
 
 	//menu shit
 	
+	towers = [];
+
+//////////////CHANGE WHEN ADDING A NEW TOWER////////////////
+	numberOfTowerTypes = 4;
+	
+	
+	towerMenuImages = [
+		dartChimp,      //1
+		boomerangChimp, //2
+		cannonSprite,   //3
+		tackShooterSprite,
+	];
+
+	towerMenuCosts = [
+		100, //dart
+		250, //boomerang
+		500, //bomb
+		300, //tack
+	];
+//////////////CHANGE WHEN ADDING A NEW TOWER////////////////
+
 	buttonArrayCoords = [];
 	buttonSize = 100;
-	
 	for(let y = 0; y < 9; y++){
 		for(let x = 0; x < 3; x++){
-			buttonArrayCoords[3*y + x] = [canvas.width - x * buttonSize - buttonSize/2, y * buttonSize + buttonSize/2];
+			buttonArrayCoords[3*y + x] = [canvas.width - ((2-x) * buttonSize) - buttonSize/2, y * buttonSize + buttonSize/2];
 		}
 	}
 	
 	upgradeButtons = [];
 	towerMenuButtons = [];
-	towerMenuCosts = [];
-	
+
 	whiteSquare = new Image();
 	whiteSquare.src = "assets/whiteSquare100x100.png";
 
@@ -488,20 +549,6 @@ function Init(){
 	for(let i = 0; i < numberOfTowerTypes; i++){
 		towerMenuButtons[i].pos = buttonArrayCoords[i];
 	}
-	
-	towerMenuImages = [
-		dartChimp,      //1
-		boomerangChimp, //2
-		cannonSprite    //3
-	];
-
-	towerMenuCosts = [
-		100, //dart
-		250, //boomerang
-		500 //bomb
-	];
-
-
 
 	//event shit	
 	mapWidth = canvas.width - buttonSize*3;
@@ -697,7 +744,23 @@ function showUpgrades(){//temporary showupgrade method, will make a more modular
 				upgradeButtons.push(new UIButton(UIClusterBombsImage, "cluster bomb button", "upgrade", 5));
 			else
 				upgradeButtons.push(new UIButton(UIPathClosed, "pathClosed", "blank", -1));
-		
+			break;
+		case 4: //tack
+			upgradeButtons.push(new UIButton(UI1PierceImage, "+1 Pierce button", "upgrade", 1));
+			upgradeButtons.push(new UIButton(UI1DamageImage, "+1 Damage button", "upgrade", 2));
+			upgradeButtons.push(new UIButton(UI1AtkSpdImage, "+1 AtkSpd button", "upgrade", 3));
+			upgradeButtons.push(new UIButton(UI1TacksImage, "+1 tacks button", "upgrade", 6));
+
+			if(!selectedTower.ringOfFire && !selectedTower.radiation){
+				upgradeButtons.push(new UIButton(UIRingOfFireImage, "ring of fire button", "upgrade", 4));
+				upgradeButtons.push(new UIButton(UIRadiationImage, "radiation button", "upgrade", 5));	
+			}
+			else{
+				upgradeButtons.push(new UIButton(UIPathClosed, "pathClosed", "blank", -1));
+				upgradeButtons.push(new UIButton(UIPathClosed, "pathClosed", "blank", -1));
+			}
+
+			break;
 		}
 	
 	for(let i = 0; i < upgradeButtons.length; i++){
@@ -812,11 +875,11 @@ function MouseMove(e){
 }
 
 function Update(){
-    
+
 	frame++;
 
     if (frame % 10 == 0 && enemiesSpawned < Infinity){
-        enemies.push(new Enemy("Balloon " + frame, 3, 2, 20));
+        enemies.push(new Enemy("Balloon " + frame, 5, 2, 20));
 		enemiesSpawned++;
     }
 	
@@ -847,7 +910,7 @@ function drawUIButton(UIButton){
 
 function Draw(){
 	
-    ctx.drawImage(mapBackground, 0, 0);
+    ctx.drawImage(mapBackground, 0, 0, canvas.width - buttonSize * 3, canvas.height);
 
 /*  // to tint the image, draw it first
     x.drawImage(fg,0,0);
@@ -909,8 +972,8 @@ function Draw(){
 		else{
 			ctx.drawImage(invalidGlowImage, mousePos[0]-invalidGlowImage.naturalWidth/2, mousePos[1]-invalidGlowImage.naturalHeight/2);
 		}
-		ctx.drawImage(towerHoveringImage, mousePos[0] - towerHoveringImage.naturalWidth/2, mousePos[1] - towerHoveringImage.naturalHeight/2);
 		ctx.drawImage(rangeCircle, mousePos[0] - range, mousePos[1] - range, diameter, diameter);
+		ctx.drawImage(towerHoveringImage, mousePos[0] - towerHoveringImage.naturalWidth/2, mousePos[1] - towerHoveringImage.naturalHeight/2);
 	}
 
 	ctx.fillRect(canvas.width - buttonSize*3, 0, buttonSize*3, canvas.height);

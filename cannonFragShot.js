@@ -3,6 +3,8 @@ class cannonFragShot {
     //	constructor(ID, pos, damage, pierce, direction, speed, radius, lifeSpan){
         constructor(parent){
             
+            this.damageType = "sharp";
+
             this.parent = parent;
             this.birthFrame = frame;
             //this.ID = parent.ID + " frag " + this.birthFrame;
@@ -25,7 +27,7 @@ class cannonFragShot {
             this.direction = [dirX, dirY];
             this.speed = 15;
             this.radius = 5;
-            this.lifespan = this.birthFrame + 30;
+            this.lifespan = this.birthFrame + 15;
         
         }
         

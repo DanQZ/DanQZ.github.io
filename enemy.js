@@ -16,11 +16,11 @@ class Enemy {
 		this.passedXDest = false;
 		this.passedYDest = false;
 
-		this.white = false;
-		this.black = false;
-		this.lead = false;
-		this.purple = false;
-		this.armored = false;
+		this.white = false; //immune to slows
+		this.black = false; //immune to force
+		this.lead = false; //immune to sharp
+		this.purple = false; //immune to heat
+		this.armored = false; //half damage from !force attacks
 
 		this.frozen = false;
 		this.stunned = false;
@@ -36,7 +36,7 @@ class Enemy {
 
     Move(){
 	
-		let percentage = (this.health / this.maxHealth);
+		let percentage = (1 - .5*(1 - this.health/this.maxHealth)); //up to -50% speed
 		this.pos[1] += this.direction[1]*this.speed * percentage;
 		this.pos[0] += this.direction[0]*this.speed * percentage;
 		

@@ -3,6 +3,8 @@ class basicShot {
     //	constructor(ID, pos, damage, pierce, direction, speed, radius, lifeSpan){
         constructor(parent){
             
+            this.damageType = "sharp";
+
             this.parent = parent;
             this.birthFrame = frame;
             this.ID = parent.ID + " dart" + this.birthFrame;

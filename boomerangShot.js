@@ -2,6 +2,8 @@ class boomerangShot {
 
 	constructor(parent, throwingArm){
 	
+		this.damageType = "sharp";
+
 		this.parent = parent;
 		this.birthFrame = frame;
 		if(throwingArm == 0){
@@ -17,7 +19,7 @@ class boomerangShot {
 		this.infiniteLoop = parent.infiniteLoop;
 		
 		this.isDead = false;
-		this.turned = 0;
+		this.turning = 0;
 		this.enemiesTouched = [""];
 		
 		let tempPosX = parent.pos[0];
@@ -25,7 +27,6 @@ class boomerangShot {
 		this.initPos = [tempPosX, tempPosY];
 		this.pos = [tempPosX, tempPosY];
 		this.distanceToParent;
-		this.maxDistance = 0;
 		
 		this.damage = parent.damage;
 		this.maxPierce = parent.pierce;
@@ -83,8 +84,12 @@ class boomerangShot {
 
 	Move(){
 	
-		if(this.bouncing && this.maxPierce > this.pierce){
+		if(this.bouncing && this.maxPierce != this.pierce){
 			let minIndex = this.ClosestUntouchedEnemyIndex();
+			if(minIndex == -1){
+				this.dead = true;
+				return;
+			}
 			if(findDistance(this.pos, enemies[minIndex].pos) > this.parent.range){
 				this.isDead = true;
 				return;
@@ -96,7 +101,7 @@ class boomerangShot {
 			}
 		}
 		
-		if(this.distanceToParent > this.parent.range*.75 && this.turned == 1){
+		if(this.distanceToParent > this.parent.range*.75 && this.turning == 1){
 			
 			let turnStrength = 10;//lower = tighter turning
 			
@@ -131,16 +136,16 @@ class boomerangShot {
 	
 	Update(){
 		
-		//somehow make the image rotate
+		//somehow make the image rotate here
 		
 		this.distanceToParent = findDistance(this.pos, this.parent.pos);
 		
-		if(this.turned == 0 && this.distanceToParent > this.parent.range*.5 && !this.bouncing){//when the boomerang turns around, it can hit the same enemies again
-			this.turned = 1;
+		if(this.turning == 0 && this.distanceToParent > this.parent.range*.5 && (!this.bouncing || this.maxPierce == this.pierce)){//when the boomerang turns around, it can hit the same enemies again
+			this.turning = 1;
 			this.enemiesTouched = [""];
 		}
 		
-		if(this.turned == 1 && this.distanceToParent < 35 && !this.infiniteLoop){
+		if(this.turning == 1 && this.distanceToParent < 35 && !this.infiniteLoop){
 			this.isDead = true;
 		}
 		
