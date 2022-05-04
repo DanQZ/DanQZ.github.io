@@ -414,73 +414,6 @@ function Init(){
 	setInterval( () => { Update(); Draw();}, 16);
 }
 
-function closestMenuButtonTo(){
-	let minDist = Infinity;
-	let minIndex = -1;
-	for(let i = 0; i < towerMenuButtons.length; i++){
-		let distance = findDistance(mousePos, towerMenuButtons[i].pos);
-		if(distance < minDist){
-			minIndex = i;
-			minDist = distance;
-		}
-	}
-	if(minIndex == -1){
-		return -1;
-	}
-	return towerMenuButtons[minIndex];
-}
-
-function mouseOverMenuButton(){
-	
-	for(let i = 0; i < towerMenuButtons.length; i++){
-		let UIButton = towerMenuButtons[i];
-		let xLower = UIButton.pos[0] - UIButton.buttonImage.width/2;
-		let xUpper = UIButton.pos[0] + UIButton.buttonImage.width/2;
-		let yLower = UIButton.pos[1] - UIButton.buttonImage.height/2;
-		let yUpper = UIButton.pos[1] + UIButton.buttonImage.height/2;
-		let inXBounds = (mousePos[0] > xLower && mousePos[0] < xUpper);
-		let inYBounds = (mousePos[1] > yLower && mousePos[1] < yUpper);
-		
-		if(inXBounds && inYBounds){
-			return true;
-		}
-	}
-	return false;
-}
-
-function closestUpgradeButtonTo(mousePos){
-	let minDist = Infinity;
-	let minIndex = -1;
-	for(let i = 0; i < upgradeButtons.length; i++){
-		let distance = findDistance(mousePos, upgradeButtons[i].pos);
-		if(distance < minDist){
-			minIndex = i;
-			minDist = distance;
-		}
-	}
-	if(minIndex == -1){
-		return -1;
-	}
-	return upgradeButtons[minIndex];
-}
-
-function mouseOverUpgradeButton(){
-	
-	for(let i = 0; i < upgradeButtons.length; i++){
-		let UIButton = upgradeButtons[i];
-		let xLower = UIButton.pos[0] - UIButton.width/2;
-		let xUpper = UIButton.pos[0] + UIButton.width/2;
-		let yLower = UIButton.pos[1] - UIButton.height/2;
-		let yUpper = UIButton.pos[1] + UIButton.height/2;
-		let inXBounds = (mousePos[0] > xLower && mousePos[0] < xUpper);
-		let inYBounds = (mousePos[1] > yLower && mousePos[1] < yUpper);
-		
-		if(inXBounds && inYBounds){
-			return true;
-		}
-	}
-	return false;
-}
 
 function closestTowerTo(pos){
 	let minDist = Infinity;
@@ -532,14 +465,6 @@ function canPlaceTower(){
 	return false;
 }
 
-function clickMenu(){
-	UI.closeUpgrades();
-	selectedTower = null;
-	let closestMenuButton = closestMenuButtonTo(mousePos);
-	closestMenuButton.Activate();
-	tempTower = new Tower(towerHovering);
-}
-
 function clickTower(){
 	UI.closeUpgrades();
 	tempTower = null;
@@ -552,8 +477,8 @@ function Click(e){
 	switch(e.button){
 		case 0: //left click
 			
-			if(mouseOverMenuButton()){//mouse is over tower menu button
-				clickMenu();
+			if(UI.mouseOverMenuButton()){//mouse is over tower menu button
+				UI.clickMenu();
 				return;
 			}
 
@@ -565,12 +490,12 @@ function Click(e){
 			}
 			
 			if(upgradeMenuOpened){//if upgrade menu is open
-				let closestUpgradeButton = closestUpgradeButtonTo(mousePos);
+				let closestUpgradeButton = UI.closestUpgradeButtonTo(mousePos);
 				if(closestUpgradeButton == -1){//if there are no buttons, close upgrade menu regardless
 					tempTower = null;
 					UI.closeUpgrades();
 				}
-				if(mouseOverUpgradeButton(mousePos, closestUpgradeButton)){//if mouse is over a button, activate button
+				if(UI.mouseOverUpgradeButton(mousePos, closestUpgradeButton)){//if mouse is over a button, activate button
 					tempTower = null;
 					closestUpgradeButton.Activate();
 					return;

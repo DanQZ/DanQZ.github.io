@@ -15,7 +15,6 @@ class UI { //make this later
     }
 */
 
-
     upgradeTower(parentButton, upgradeType) {
 
         switch (selectedTower.towerType) {
@@ -139,6 +138,14 @@ class UI { //make this later
         this.showUpgrades();
     }
 
+    clickMenu(){
+        this.closeUpgrades();
+        selectedTower = null;
+        let closestMenuButton = this.closestMenuButtonTo(mousePos);
+        closestMenuButton.Activate();
+        tempTower = new Tower(towerHovering);
+    }
+    
 
     buyNewTower(parentButton, towerType) {
         towerHovering = towerType;
@@ -154,6 +161,73 @@ class UI { //make this later
         towerHovering = -1;
     }
 
+    closestMenuButtonTo(){
+        let minDist = Infinity;
+        let minIndex = -1;
+        for(let i = 0; i < towerMenuButtons.length; i++){
+            let distance = findDistance(mousePos, towerMenuButtons[i].pos);
+            if(distance < minDist){
+                minIndex = i;
+                minDist = distance;
+            }
+        }
+        if(minIndex == -1){
+            return -1;
+        }
+        return towerMenuButtons[minIndex];
+    }
+    
+    mouseOverMenuButton(){
+        
+        for(let i = 0; i < towerMenuButtons.length; i++){
+            let UIButton = towerMenuButtons[i];
+            let xLower = UIButton.pos[0] - UIButton.buttonImage.width/2;
+            let xUpper = UIButton.pos[0] + UIButton.buttonImage.width/2;
+            let yLower = UIButton.pos[1] - UIButton.buttonImage.height/2;
+            let yUpper = UIButton.pos[1] + UIButton.buttonImage.height/2;
+            let inXBounds = (mousePos[0] > xLower && mousePos[0] < xUpper);
+            let inYBounds = (mousePos[1] > yLower && mousePos[1] < yUpper);
+            
+            if(inXBounds && inYBounds){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    closestUpgradeButtonTo(mousePos){
+        let minDist = Infinity;
+        let minIndex = -1;
+        for(let i = 0; i < upgradeButtons.length; i++){
+            let distance = findDistance(mousePos, upgradeButtons[i].pos);
+            if(distance < minDist){
+                minIndex = i;
+                minDist = distance;
+            }
+        }
+        if(minIndex == -1){
+            return -1;
+        }
+        return upgradeButtons[minIndex];
+    }
+    
+    mouseOverUpgradeButton(){
+        
+        for(let i = 0; i < upgradeButtons.length; i++){
+            let UIButton = upgradeButtons[i];
+            let xLower = UIButton.pos[0] - UIButton.width/2;
+            let xUpper = UIButton.pos[0] + UIButton.width/2;
+            let yLower = UIButton.pos[1] - UIButton.height/2;
+            let yUpper = UIButton.pos[1] + UIButton.height/2;
+            let inXBounds = (mousePos[0] > xLower && mousePos[0] < xUpper);
+            let inYBounds = (mousePos[1] > yLower && mousePos[1] < yUpper);
+            
+            if(inXBounds && inYBounds){
+                return true;
+            }
+        }
+        return false;
+    }
     showUpgrades() {//temporary showupgrade method, will make a more modular one later
 
         upgradeMenuOpened = true;
