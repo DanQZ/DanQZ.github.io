@@ -45,9 +45,12 @@ class Tower {
 				this.borderBounce = false; //bounce off borders
 				this.explosive = false; //explode at end
 				
-				this.tripleShotInitPrice = 500;
-				this.borderBounceInitPrice = 500;
-				this.explosiveInitPrice = 500;
+				//this.tripleShotInitPrice = 500;
+				//this.borderBounceInitPrice = 500;
+				//this.explosiveInitPrice = 500;
+				this.upgradePrice[4]=500;//triple shot
+				this.upgradePrice[5]=500;//border bounce
+				this.upgradePrice[6]=500;//explosive
 				
 				break;
 				
@@ -88,8 +91,8 @@ class Tower {
 				//this.atkSpeedPrice = 50*this.atkSpeedLevel;
 				//this.damagePrice = 100*this.damageLevel;
 				this.upgradePrice[1]=50;//pierce
-				this.upgradePrice[2]=50;//atkSpd
-				this.upgradePrice[3]=100;//damage
+				this.upgradePrice[2]=100;//dmg
+				this.upgradePrice[3]=50;//atk spd
 /*
 				this.upgradePrice = [
 					this.piercePrice * this.pierceLevel,
@@ -97,10 +100,14 @@ class Tower {
 					this.damagePrice,
 				];
 */
-				this.doubleRangPrice = 300*(this.pierceLevel*this.damageLevel*this.atkSpeedLevel*.9);
-				this.bouncingPrice = 1500;
-				this.infiniteLoopPrice = 3000;
-				this.quadraRangPrice = 3000;
+				//this.doubleRangPrice = 300*(this.pierceLevel*this.damageLevel*this.atkSpeedLevel*.9);
+				//this.bouncingPrice = 1500;
+				//this.infiniteLoopPrice = 3000;
+				//this.quadraRangPrice = 3000;
+				this.upgradePrice[4]=300;//double rang
+				this.upgradePrice[5]=1500;//bouncing
+				this.upgradePrice[6]=3000;//infinite
+				this.upgradePrice[7]=3000;//quadraRang
 				
 				break;
 			case 3: //cannon
@@ -133,9 +140,9 @@ class Tower {
 				//this.atkSpeedPrice = 50;
 				//this.damagePrice = 100;
 
-				this.upgradePrice[1]=50;//pierce
-				this.upgradePrice[2]=50;//atkspd
-				this.upgradePrice[3]=100;//damage
+				this.upgradePrice[1]=50;//range
+				this.upgradePrice[2]=50;//damage
+				this.upgradePrice[3]=100;//atk speed
 
 				this.fragBomb = false;
 				this.clusterBomb = false;
@@ -144,9 +151,11 @@ class Tower {
 
 				this.guidedMissile = false;
 
-				this.fragBombPrice = 50;
-				this.clusterBombPrice = 50;
-				this.guidedMissilePrice = 100;
+				//this.fragBombPrice = 50;
+				//this.clusterBombPrice = 50;
+				//this.guidedMissilePrice = 100;
+				this.upgradePrice[4]=50;//frag
+				this.upgradePrice[5]=50;//cluster
 
 				break;
 
@@ -175,6 +184,8 @@ class Tower {
 				this.ringOfFire = false;
 				this.radiation = false;
 				
+
+
 				break;
 		}
     }
