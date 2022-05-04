@@ -45,7 +45,7 @@ class boomerangShot {
 	}
 
 	ClosestUntouchedEnemyIndex(){ //modified closestEnemyIndex
-		let minIndex = 0;
+		let minIndex = -1;
 		let minDist = Infinity;
 		
 		for (let i = 0; i < enemies.length; i++){//for each enemy
