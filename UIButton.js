@@ -5,8 +5,8 @@ class UIButton {
 		this.buttonImage = buttonImage;
 		this.pos = [0,0];
 		this.imageName = imageName;
-		this.width = buttonImage.naturalWidth;
-		this.height = buttonImage.naturalHeight;
+		this.width = buttonImage.width;
+		this.height = buttonImage.height;
 		this.buttonType = buttonType;
 		this.buttonTypeType = buttonTypeType;
 	}

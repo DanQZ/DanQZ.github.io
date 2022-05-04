@@ -7,6 +7,8 @@ class UI { //make this later
         this.whiteSquare = new Image();
         this.whiteSquare.src = "assets/whiteSquare100x100.png";
 
+        this.UIPathClosed = new Image();
+        this.UIPathClosed.src = "assets/pathClosed.png";
 
         //general upgrades
         this.UI1PierceImage = new Image();
@@ -61,7 +63,7 @@ class UI { //make this later
             }
         }
 
-        
+
         this.towerMenuImages = [
             dartChimp,      //1
             boomerangChimp, //2
@@ -83,7 +85,7 @@ class UI { //make this later
         for (let i = 0; i < this.numberOfTowerTypes; i++) {
             this.towerMenuButtons.push(new UIButton(this.whiteSquare, "tower " + (i + 1) + " button", "tower", i + 1)); //keep i+1 as tower type starts at 1
         }
-        
+
         for (let i = 0; i < this.numberOfTowerTypes; i++) {
             this.towerMenuButtons[i].pos = this.buttonArrayCoords[i];
         }
@@ -97,11 +99,6 @@ class UI { //make this later
         this.buttonSize = 100;*/
 
     }
-
-    Update() {
-
-    }
-
 
     upgradeTower(parentButton, upgradeType) {
 
@@ -344,29 +341,29 @@ class UI { //make this later
                 break;
 
             case 2: //boomerang
-            this.upgradeButtons.push(new UIButton(this.UI1PierceImage, "+1 Pierce button", "upgrade", 1));
-            this.upgradeButtons.push(new UIButton(this.UI1DamageImage, "+1 Damage button", "upgrade", 2));
-            this.upgradeButtons.push(new UIButton(this.UI1AtkSpdImage, "+1 AtkSpd button", "upgrade", 3));
+                this.upgradeButtons.push(new UIButton(this.UI1PierceImage, "+1 Pierce button", "upgrade", 1));
+                this.upgradeButtons.push(new UIButton(this.UI1DamageImage, "+1 Damage button", "upgrade", 2));
+                this.upgradeButtons.push(new UIButton(this.UI1AtkSpdImage, "+1 AtkSpd button", "upgrade", 3));
 
                 if (!selectedTower.doubleRang) {
                     this.upgradeButtons.push(new UIButton(this.UIDoubleRangImage, "double rang button", "upgrade", 4));
                 }
                 else {
                     if (!selectedTower.quadraRang)
-                    this.upgradeButtons.push(new UIButton(this.UIQuadraRangImage, "quadra rang button", "upgrade", 7));
+                        this.upgradeButtons.push(new UIButton(this.UIQuadraRangImage, "quadra rang button", "upgrade", 7));
                     else
-                    this.upgradeButtons.push(new UIButton(this.UIPathClosed, "pathClosed", "blank", -1));
+                        this.upgradeButtons.push(new UIButton(this.UIPathClosed, "pathClosed", "blank", -1));
                 }
 
                 if (!selectedTower.bouncing)
-                this.upgradeButtons.push(new UIButton(this.UIBouncingRangImage, "bouncing rang button", "upgrade", 5));
+                    this.upgradeButtons.push(new UIButton(this.UIBouncingRangImage, "bouncing rang button", "upgrade", 5));
                 else
-                this.upgradeButtons.push(new UIButton(this.UIPathClosed, "pathClosed", "blank", -1));
+                    this.upgradeButtons.push(new UIButton(this.UIPathClosed, "pathClosed", "blank", -1));
 
                 if (!selectedTower.infiniteLoop)
-                this.upgradeButtons.push(new UIButton(this.UIInfiniteRangImage, "infinite loop rang button", "upgrade", 6));
+                    this.upgradeButtons.push(new UIButton(this.UIInfiniteRangImage, "infinite loop rang button", "upgrade", 6));
                 else
-                this.upgradeButtons.push(new UIButton(this.UIPathClosed, "UIPathClosed", "blank", -1));
+                    this.upgradeButtons.push(new UIButton(this.UIPathClosed, "UIPathClosed", "blank", -1));
 
                 break;
             case 3: //cannon
@@ -405,6 +402,7 @@ class UI { //make this later
         for (let i = 0; i < this.upgradeButtons.length; i++) {
             this.upgradeButtons[i].pos = this.buttonArrayCoords[this.buttonArrayCoords.length - i - 1];
         }
+        
     }
 
     closeUpgrades() {

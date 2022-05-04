@@ -45,9 +45,7 @@ class Tower {
 				this.borderBounce = false; //bounce off borders
 				this.explosive = false; //explode at end
 				
-				//this.tripleShotInitPrice = 500;
-				//this.borderBounceInitPrice = 500;
-				//this.explosiveInitPrice = 500;
+
 				this.upgradePrice[4]=500;//triple shot
 				this.upgradePrice[5]=500;//border bounce
 				this.upgradePrice[6]=500;//explosive
@@ -87,23 +85,10 @@ class Tower {
 				this.infiniteLoop = false; //infinite looping
 				this.quadraRang = false; //quadra shot
 
-				//this.piercePrice = 50*this.pierceLevel;
-				//this.atkSpeedPrice = 50*this.atkSpeedLevel;
-				//this.damagePrice = 100*this.damageLevel;
 				this.upgradePrice[1]=50;//pierce
 				this.upgradePrice[2]=100;//dmg
 				this.upgradePrice[3]=50;//atk spd
-/*
-				this.upgradePrice = [
-					this.piercePrice * this.pierceLevel,
-					this.atkSpeedPrice,
-					this.damagePrice,
-				];
-*/
-				//this.doubleRangPrice = 300*(this.pierceLevel*this.damageLevel*this.atkSpeedLevel*.9);
-				//this.bouncingPrice = 1500;
-				//this.infiniteLoopPrice = 3000;
-				//this.quadraRangPrice = 3000;
+
 				this.upgradePrice[4]=300;//double rang
 				this.upgradePrice[5]=1500;//bouncing
 				this.upgradePrice[6]=3000;//infinite
@@ -181,9 +166,16 @@ class Tower {
 				this.damageLevel = 1;
 				this.numOfTacksLevel = 1;
 				
+				this.upgradePrice[1]=50;//pierce
+				this.upgradePrice[2]=50;//damage
+				this.upgradePrice[3]=100;//atk speed
+				this.upgradePrice[6]=100;//+1 tacks per spray
+
 				this.ringOfFire = false;
 				this.radiation = false;
 				
+				this.upgradePrice[4]=1000;//ring of fire
+				this.upgradePrice[5]=1000;//radiation
 
 
 				break;
