@@ -273,9 +273,7 @@ function Init(){
 	
 	
 	//-----------------------------------------------TOWER + MENU SHIT BELOW--------------------------------------------------------------
-	
-	UIPathClosed = new Image();
-	UIPathClosed.src = "assets/pathClosed.png";
+
 	
 	//tower info and shit
 	towerHovering = -1;
