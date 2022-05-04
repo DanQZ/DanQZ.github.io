@@ -16,7 +16,7 @@ class UI { //make this later
 */
 
 
-    UpgradeTower(parentButton, upgradeType) {
+    upgradeTower(parentButton, upgradeType) {
 
         switch (selectedTower.towerType) {
             case 1:// dart
