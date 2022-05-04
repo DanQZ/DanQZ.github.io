@@ -5,7 +5,7 @@ class Tower {
 		this.towerType = towerType;
 		this.radius;
 		this.projectiles = [];
-		this.upgradePrices = [];
+		this.upgradePrice = [];
 		
 		switch(this.towerType){
 			case 1: //dart
@@ -35,10 +35,11 @@ class Tower {
 				this.atkSpeedLevel = 1;
 				this.damageLevel = 1;
 				this.rangeLevel = 1;
-				
-				this.pierceInitPrice = 50;
-				this.atkSpeedInitPrice = 50;
-				this.damageInitPrice = 100;
+
+				this.upgradePrice[1] = 50; //pierce
+				this.upgradePrice[2] = 50; //atkSpeed
+				this.upgradePrice[3] = 100; //damage
+				this.upgradePrice[7] = 50; //range
 				
 				this.tripleShot = false; //triple shot
 				this.borderBounce = false; //bounce off borders
@@ -47,13 +48,7 @@ class Tower {
 				this.tripleShotInitPrice = 500;
 				this.borderBounceInitPrice = 500;
 				this.explosiveInitPrice = 500;
-				/*
-				this.upgradePrices = [
-					this.piercePrice,
-					this.atkSpeedPrice,
-					this.damagePrice,
-				];
-				*/
+				
 				break;
 				
 			case 2: //boomerang
@@ -93,7 +88,7 @@ class Tower {
 				this.atkSpeedPrice = 50*this.atkSpeedLevel;
 				this.damagePrice = 100*this.damageLevel;
 /*
-				this.upgradePrices = [
+				this.upgradePrice = [
 					this.piercePrice * this.pierceLevel,
 					this.atkSpeedPrice,
 					this.damagePrice,

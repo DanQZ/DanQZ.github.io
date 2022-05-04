@@ -17,7 +17,10 @@ class UIButton {
 			case "blank":
 				break;
 			case "upgrade": //upgrade
-				upgradeTower(this, this.buttonTypeType); //buttonTypeType is upgradeType, selectedTower is towerType
+				if(money >= selectedTower.upgradePrice[this.buttonTypeType]){
+					upgradeTower(this, this.buttonTypeType); //buttonTypeType is upgradeType, selectedTower is towerType
+					money -= selectedTower.upgradePrice[this.buttonTypeType];
+				}
 				break;
 			case "tower": //menu and shit
 				if(money >= towerMenuCosts[this.buttonTypeType-1])

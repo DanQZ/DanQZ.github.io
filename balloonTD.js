@@ -140,11 +140,6 @@ function findDirection(start, target){
 	return temp;
 }
 
-function buyNewTower(parentButton, towerType){
-	towerHovering = towerType;
-	towerHoveringImage = towerMenuImages[towerType-1];
-}
-
 function upgradeTower(parentButton, upgradeType){
 
 	switch(selectedTower.towerType){
@@ -542,7 +537,7 @@ function Init(){
 	whiteSquare.src = "assets/whiteSquare100x100.png";
 
 	for(let i = 0; i < numberOfTowerTypes; i++){
-		towerMenuButtons.push(new UIButton(whiteSquare, "tower " + (i+1) + " button", "tower", i+1)); //keep i+1 as tower type starts at i
+		towerMenuButtons.push(new UIButton(whiteSquare, "tower " + (i+1) + " button", "tower", i+1)); //keep i+1 as tower type starts at 1
 		//I have no clue why this code does not work, but it does not for some reason.
 		//	towerMenuButtons.push(new UIButton(whiteSquare, [whiteSquare.naturalWidth/2 + 100*i], "tower " + i + " button", "tower", 1));	
 	}
@@ -550,7 +545,7 @@ function Init(){
 		towerMenuButtons[i].pos = buttonArrayCoords[i];
 	}
 
-	//event shit	
+	//event shit
 	mapWidth = canvas.width - buttonSize*3;
 	mapHeight = canvas.height;
 	canvas.onmousedown = Click;
@@ -779,6 +774,11 @@ function clickMenu(){
 	let closestMenuButton = closestMenuButtonTo(mousePos);
 	closestMenuButton.Activate();
 	tempTower = new Tower(towerHovering);
+}
+
+function buyNewTower(parentButton, towerType){
+	towerHovering = towerType;
+	towerHoveringImage = towerMenuImages[towerType-1];
 }
 
 function placeTower(){
