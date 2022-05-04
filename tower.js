@@ -84,9 +84,12 @@ class Tower {
 				this.infiniteLoop = false; //infinite looping
 				this.quadraRang = false; //quadra shot
 
-				this.piercePrice = 50*this.pierceLevel;
-				this.atkSpeedPrice = 50*this.atkSpeedLevel;
-				this.damagePrice = 100*this.damageLevel;
+				//this.piercePrice = 50*this.pierceLevel;
+				//this.atkSpeedPrice = 50*this.atkSpeedLevel;
+				//this.damagePrice = 100*this.damageLevel;
+				this.upgradePrice[1]=50;//pierce
+				this.upgradePrice[2]=50;//atkSpd
+				this.upgradePrice[3]=100;//damage
 /*
 				this.upgradePrice = [
 					this.piercePrice * this.pierceLevel,
@@ -126,9 +129,13 @@ class Tower {
 				this.damageLevel = 1;
 				this.explosionDamageLevel = 1;
 				
-				this.piercePrice = 50;
-				this.atkSpeedPrice = 50;
-				this.damagePrice = 100;
+				//this.piercePrice = 50;
+				//this.atkSpeedPrice = 50;
+				//this.damagePrice = 100;
+
+				this.upgradePrice[1]=50;//pierce
+				this.upgradePrice[2]=50;//atkspd
+				this.upgradePrice[3]=100;//damage
 
 				this.fragBomb = false;
 				this.clusterBomb = false;
