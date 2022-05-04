@@ -92,16 +92,9 @@ let placeableTower;
 let invalidGround;
 //let rangeCircle;
 
-let buttonArrayCoords;
-let buttonSize;
 
 let selectedTower;
-let upgradeButtons;
 let upgradeMenuOpened;
-
-let towerMenuButtons;
-let towerMenuImages;
-let numberOfTowerTypes;
 
 let specialEffects;
 
@@ -239,8 +232,6 @@ function enemyCollision(projectile){
 
 function Init(){
 
-	UI = new UI();
-
 	//canvas shit
 	canvas = document.getElementById("c");
 	canvas.height = 900;
@@ -301,112 +292,32 @@ function Init(){
 	dartChimp = new Image();
 	dartChimp.src = "assets/vinny50x50.png";
 	
-	UI1PierceImage = new Image();
-	UI1PierceImage.src = "assets/UI+1Pierce.png";
-	UI1DamageImage = new Image();
-	UI1DamageImage.src = "assets/UI+1Damage.png";
-	UI1AtkSpdImage = new Image();
-	UI1AtkSpdImage.src = "assets/UI+1AtkSpd.png";
-	UI10RangeImage = new Image();
-	UI10RangeImage.src = "assets/10RangeButton.png";
-	
-	UITripleShotImage = new Image();
-	UITripleShotImage.src = "assets/tripleShotButton.png";
-	UIBorderBounceImage = new Image();
-	UIBorderBounceImage.src = "assets/borderBounceButton.png";
-	UIExplodingImage = new Image();
-	UIExplodingImage.src = "assets/explodingDartButton.png";
-	
 	//boomerang
 	boomerangChimp = new Image();
 	boomerangChimp.src = "assets/daniella70x70.png";
 	boomerang = new Image();
 	boomerang.src = "assets/boomerang.png";
 	
-	UIDoubleRangImage = new Image();
-	UIDoubleRangImage.src = "assets/doubleRangButton.png";
-	UIInfiniteRangImage = new Image();
-	UIInfiniteRangImage.src = "assets/infiniteRangButton.png";
-	UIBouncingRangImage = new Image();
-	UIBouncingRangImage.src = "assets/bouncingRangButton.png";
-	UIQuadraRangImage = new Image();
-	UIQuadraRangImage.src = "assets/quadraRangButton.png";
-
 	//cannon
 	cannonSprite = new Image();
 	cannonSprite.src = "assets/declan70x70.png";
 	bombSprite = new Image();
 	bombSprite.src = "assets/bombSprite.png";
 
-	UIFragBombsImage = new Image();
-	UIFragBombsImage.src = "assets/fragBombButton.png";
-	UIClusterBombsImage = new Image();
-	UIClusterBombsImage.src = "assets/clusterBombButton.png";
-
 	//tack shooter
 	tackShooterSprite = new Image();
 	tackShooterSprite.src = "assets/thomas50x50.png";
-	UI1TacksImage = new Image();
-	UI1TacksImage.src = "assets/UI+1TacksButton.png";
-	UIRingOfFireImage = new Image();
-	UIRingOfFireImage.src = "assets/UIRoFButton.png";
-	UIRadiationImage = new Image();
-	UIRadiationImage.src = "assets/UIRadiationButton.png";
-
-
 
 	//---------------------------------------------END OF TOWER SHIT--------------------------------------------
-
-
 
 	//menu shit
 	
 	towers = [];
 
-//////////////CHANGE WHEN ADDING A NEW TOWER////////////////
-	numberOfTowerTypes = 4;
-	
-	
-	towerMenuImages = [
-		dartChimp,      //1
-		boomerangChimp, //2
-		cannonSprite,   //3
-		tackShooterSprite,
-	];
-
-	towerMenuCosts = [
-		100, //dart
-		250, //boomerang
-		500, //bomb
-		300, //tack
-	];
-//////////////CHANGE WHEN ADDING A NEW TOWER////////////////
-
-	buttonArrayCoords = [];
-	buttonSize = 100;
-	for(let y = 0; y < 9; y++){
-		for(let x = 0; x < 3; x++){
-			buttonArrayCoords[3*y + x] = [canvas.width - ((2-x) * buttonSize) - buttonSize/2, y * buttonSize + buttonSize/2];
-		}
-	}
-	
-	upgradeButtons = [];
-	towerMenuButtons = [];
-
-	whiteSquare = new Image();
-	whiteSquare.src = "assets/whiteSquare100x100.png";
-
-	for(let i = 0; i < numberOfTowerTypes; i++){
-		towerMenuButtons.push(new UIButton(whiteSquare, "tower " + (i+1) + " button", "tower", i+1)); //keep i+1 as tower type starts at 1
-		//I have no clue why this code does not work, but it does not for some reason.
-		//	towerMenuButtons.push(new UIButton(whiteSquare, [whiteSquare.naturalWidth/2 + 100*i], "tower " + i + " button", "tower", 1));	
-	}
-	for(let i = 0; i < numberOfTowerTypes; i++){
-		towerMenuButtons[i].pos = buttonArrayCoords[i];
-	}
+	UI = new UI();
 
 	//event shit
-	mapWidth = canvas.width - buttonSize*3;
+	mapWidth = canvas.width - UI.buttonSize*3;
 	mapHeight = canvas.height;
 	canvas.onmousedown = Click;
 	canvas.onmousemove = MouseMove;
@@ -511,7 +422,7 @@ function Click(e){
 			
 			tempTower = null;
 			towerHovering = -1;
-			if(mousePos > canvas.width - buttonSize*3){//if mouse is over the menu side of the screen
+			if(mousePos > canvas.width - UI.buttonSize*3){//if mouse is over the menu side of the screen
 				return;
 			}
 			selectedTower = null;
@@ -585,7 +496,7 @@ function drawUIButton(UIButton){
 
 function Draw(){
 	
-    ctx.drawImage(mapBackground, 0, 0, canvas.width - buttonSize * 3, canvas.height);
+    ctx.drawImage(mapBackground, 0, 0, canvas.width - UI.buttonSize * 3, canvas.height);
 
 /*  // to tint the image, draw it first
     x.drawImage(fg,0,0);
@@ -651,18 +562,18 @@ function Draw(){
 		ctx.drawImage(towerHoveringImage, mousePos[0] - towerHoveringImage.naturalWidth/2, mousePos[1] - towerHoveringImage.naturalHeight/2);
 	}
 
-	ctx.fillRect(canvas.width - buttonSize*3, 0, buttonSize*3, canvas.height);
+	ctx.fillRect(canvas.width - UI.buttonSize*3, 0, UI.buttonSize*3, canvas.height);
 		
 	if(upgradeMenuOpened){ //draw upgrade menu buttons
-		for(let i = 0; i < upgradeButtons.length; i++){
-			drawUIButton(upgradeButtons[i]);
+		for(let i = 0; i < UI.upgradeButtons.length; i++){
+			drawUIButton(UI.upgradeButtons[i]);
 		}
 	}
 	//draw tower menu
-	for(let i = 0; i < numberOfTowerTypes; i++){
-		let background = towerMenuButtons[i];
-		let towerImage = towerMenuImages[i];
-		drawUIButton(towerMenuButtons[i]);
+	for(let i = 0; i < UI.numberOfTowerTypes; i++){
+		let background = UI.towerMenuButtons[i];
+		let towerImage = UI.towerMenuImages[i];
+		drawUIButton(UI.towerMenuButtons[i]);
 		ctx.drawImage(towerImage, (background.pos[0] - towerImage.naturalWidth/2), (background.pos[1]-towerImage.naturalHeight/2), towerImage.naturalWidth, towerImage.naturalHeight);
 	}
 
@@ -671,9 +582,9 @@ function Draw(){
 	ctx.fillStyle = 'white';
 	ctx.strokeStyle = 'blue';
 	
-	for(let i = 0; i < numberOfTowerTypes; i++){
-		ctx.fillText("$" + towerMenuCosts[i], buttonArrayCoords[i][0] - buttonSize/2, buttonArrayCoords[i][1] + buttonSize/2);
-		ctx.strokeText("$" + towerMenuCosts[i], buttonArrayCoords[i][0] - buttonSize/2, buttonArrayCoords[i][1] + buttonSize/2);
+	for(let i = 0; i < UI.numberOfTowerTypes; i++){
+		ctx.fillText("$" + UI.towerMenuCosts[i], UI.buttonArrayCoords[i][0] - UI.buttonSize/2, UI.buttonArrayCoords[i][1] + UI.buttonSize/2);
+		ctx.strokeText("$" + UI.towerMenuCosts[i], UI.buttonArrayCoords[i][0] - UI.buttonSize/2, UI.buttonArrayCoords[i][1] + UI.buttonSize/2);
 	}
 
 	ctx.fillStyle = 'orange';

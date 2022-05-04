@@ -23,7 +23,7 @@ class UIButton {
 				}
 				break;
 			case "tower": //menu and shit
-				if(money >= towerMenuCosts[this.buttonTypeType-1])
+				if(money >= UI.towerMenuCosts[this.buttonTypeType-1])
 					UI.buyNewTower(this, this.buttonTypeType);
 				break;
 		}
