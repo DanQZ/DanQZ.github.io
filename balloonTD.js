@@ -240,7 +240,7 @@ function enemyCollision(projectile){
 function Init(){
 
 	UI = new UI();
-
+	enemySpawn = new enemySpawn();
 	//canvas shit
 	canvas = document.getElementById("c");
 	canvas.height = 900;
@@ -553,10 +553,12 @@ function Update(){
 
 	frame++;
 
-    if (frame % 10 == 0 && enemiesSpawned < Infinity){
+    /*if (frame % 10 == 0 && enemiesSpawned < Infinity){
         enemies.push(new Enemy("Balloon " + frame, 5, 2, 20));
 		enemiesSpawned++;
-    }
+    }*/
+	//enemySpawn=new enemySpawn();
+	enemySpawn.Update();
 	
     for(let i = 0; i < enemies.length; i++){
         enemies[i].Update();
