@@ -55,13 +55,13 @@ Apr 25 v0.0.6 Fixes + cannon
 -Added money and lives counter
 -Added tower costs
 
-Apr 26 v0.0.7
+Apr 26 v0.0.7 //enemy health bars + speed scaling
 -Added enemy health bars
 -Fixed bouncing boomerang for >1 hp enemies
 -Cannon damage upgrade now works properly
 -Enemies now move slower the lower hp they have
 
-Apr 30 v0.0.8
+Apr 30 v0.0.8 //Tack shooter update + target first
 -Fixed bouncing + infinite life boomerangs
 -Replaced jackson's stupid fucking face
 -Added damage types to projectiles (doesn't do anything yet)
@@ -69,6 +69,13 @@ Apr 30 v0.0.8
 -Added RoF + radiation tack shooter upgrades
 -Added first targetting priority (now set as default to all targetting towers)
 
+May 4 v0.0.9 //UI.js + mapMaker
+-John Choi joins Peepee Poopoo Studios as a lead developer
+-Created Github repository
+-Created a map maker that records mousePos and prints formatted coordinates to copy/paste for new maps
+-Upgrades now cost money (no scaling added yet)
+-Backend: over 400 lines of UI related code moved out of balloonTD.js to UI.js
+-Fixed another fucking bouncing boomerang bug
 */
 
 let lives;
