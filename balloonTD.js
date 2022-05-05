@@ -137,17 +137,29 @@ function closeButton(UIButton){ //not sure if this is necessary
 class MapCheckpoints {
     constructor(){
 		this.checkPoints = [
-		[0,100],
-		[400,150],
-		[500, 100],
-		[600, 200],
-		[650, 300],
-		[700, 500],
-		[1000, 700],
-		[500, 600],
-		[400, 400],
-		[500, 200],
-		[100, 400],
+			[4, 398],
+			[144, 429],
+			[348, 459],
+			[543, 470],
+			[737, 470],
+			[886, 407],
+			[991, 280],
+			[966, 134],
+			[859, 75],
+			[703, 86],
+			[669, 152],
+			[747, 262],
+			[918, 365],
+			[1014, 459],
+			[1059, 581],
+			[1039, 747],
+			[940, 804],
+			[876, 788],
+			[852, 710],
+			[927, 633],
+			[1042, 588],
+			[1293, 549]
+
 		];
 
 		for(let i = 0; i < this.checkPoints.length; i++){
@@ -251,7 +263,7 @@ function Init(){
 	//map shit
 	map = new MapCheckpoints();
 	mapBackground = new Image();
-	mapBackground.src = "assets/map1.png";
+	mapBackground.src = "assets/map2.png";
 	
 	//special effects
 	specialEffects = [];
@@ -494,7 +506,7 @@ function drawUIButton(UIButton){
 
 function Draw(){
 	
-    ctx.drawImage(mapBackground, 0, 0, canvas.width - UI.buttonSize * 3, canvas.height);
+    ctx.drawImage(mapBackground, 0, 0);//, canvas.width - UI.buttonSize * 3, canvas.height);
 
 /*  // to tint the image, draw it first
     x.drawImage(fg,0,0);

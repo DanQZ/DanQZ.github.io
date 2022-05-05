@@ -67,7 +67,7 @@ class Enemy {
 			}
 		}
 		
-		if(this.passedXDest && this.passedYDest){
+		if(this.passedXDest || this.passedYDest){
 			let tempPos = [];
 			tempPos[0] = map.checkPoints[this.targetCheckpoint][0];
 			tempPos[1] = map.checkPoints[this.targetCheckpoint][1];
