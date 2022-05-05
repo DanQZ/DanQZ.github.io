@@ -1,2 +1,35 @@
 Things to Add:
-to add
+
+CURRENT ROADMAP IN NO PARTICULAR ORDER
+
+-------definitely will add-------
+-most towers from BTD6
+-upgrade prices + price scaling
+-different maps
+-easy custom map implementation
+-maps with multiple lanes
+-enemy/projectile type interactions
+-enemy debuffs (slows, poisons, etc)
+-enemies that recursively spawn smaller enemies on death
+-enemy spawn patterns and set rounds
+-boss enemies
+-sounds
+-main menu
+
+------maybe will add--------
+-supply lines system
+-Geraldo-esque support item shop
+-idle game mechanics (edited)
+
+
+
+PRIORITY
+-Engine
+ -easy to make custom maps (mostly done)
+ -easy to make custom waves and levels
+ -read from text file for both?
+ -enemy/projectile type interactions
+ -menu
+  -pause
+  -select map
+
