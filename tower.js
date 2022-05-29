@@ -283,7 +283,7 @@ class Tower {
 
 				if(this.ringOfFire){
 					for(let i = 0; i < 8; i++){
-						let directionInRads = (2*Math.PI / this.numOfTacks * i);
+						let directionInRads = (2*Math.PI/8 * i);
 						this.direction[0] = Math.cos(directionInRads);
 						this.direction[1] = Math.sin(directionInRads);
 						let pos = [this.pos[0] + (this.direction[0] * this.range*.75), this.pos[1] + (this.direction[1] * this.range*.75)];
