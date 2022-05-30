@@ -80,6 +80,7 @@ class UI { //make this later
 
         this.upgradeButtons = [];
         this.towerMenuButtons = [];
+        this.messages=[];
 
 
         for (let i = 0; i < this.numberOfTowerTypes; i++) {
@@ -238,15 +239,15 @@ class UI { //make this later
         towerHovering = -1;
     }
 
-    clickMenu() {
+    clickTowerMenu() {
         this.closeUpgrades();
         selectedTower = null;
-        let closestMenuButton = this.closestMenuButtonTo(mousePos);
-        closestMenuButton.Activate();
+        let closestTowerMenuButton = this.closestTowerMenuButtonTo(mousePos);
+        closestTowerMenuButton.Activate();
         tempTower = new Tower(towerHovering);
     }
 
-    closestMenuButtonTo() {
+    closestTowerMenuButtonTo() {
         let minDist = Infinity;
         let minIndex = -1;
         for (let i = 0; i < this.towerMenuButtons.length; i++) {
@@ -338,6 +339,10 @@ class UI { //make this later
                 else
                     this.upgradeButtons.push(new UIButton(this.UIPathClosed, "pathClosed", "blank", -1));
 
+                
+
+                    
+
                 break;
 
             case 2: //boomerang
@@ -403,6 +408,27 @@ class UI { //make this later
             this.upgradeButtons[i].pos = this.buttonArrayCoords[this.buttonArrayCoords.length - i - 1];
         }
         
+    }
+
+    hoverUpgrades()
+    {
+        this.messages.length=0;
+        switch (selectedTower.towerType) {
+            case 1://dart 
+                switch(this.closestUpgradeButtonTo(mousePos).buttonTypeType){
+                case 1:
+                    this.messages.push("Pierce");
+                    this.messages.push("It pierces");
+                    this.messages.push("Cost money");
+                    break;
+                case 2:
+                    this.messages.push("Damge");
+                    this.messages.push("It damages");
+                    this.messages.push("Cost money");
+                    break; 
+                }
+                break;
+        }
     }
 
     closeUpgrades() {
