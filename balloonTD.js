@@ -257,7 +257,6 @@ function Init() {
 	canvas.height = 900;
 	canvas.width = 1600;
 	ctx = canvas.getContext("2d");
-	ctx.font = "12px Arial";
 	canvas.oncontextmenu = () => { return false };
 
 	//always displayed game info
