@@ -1,14 +1,14 @@
 class UIButton {
 	constructor(buttonImage, imageName, buttonType, buttonTypeType){
-		
+
 		this.timesActivated = 0;
 		this.buttonImage = buttonImage;
 		this.pos = [0,0];
 		this.imageName = imageName;
 		this.width = buttonImage.width;
 		this.height = buttonImage.height;
-		this.buttonType = buttonType;
-		this.buttonTypeType = buttonTypeType;
+		this.buttonType = buttonType; //selects whether it bys a tower, or an upgrade, etc. what array of buttons is it clicking on?
+		this.buttonTypeType = buttonTypeType; //selects what tower to buy, or what upgrade to buy, etc
 	}
 	
 	Activate(){
