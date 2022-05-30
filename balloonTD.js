@@ -433,7 +433,7 @@ function Click(e) {
 				case 0: //left click
 
 					if (UI.mouseOverMenuButton()) {//mouse is over tower menu button
-						UI.clickMenu();
+						UI.clickTowerMenu();
 						return;
 					}
 
@@ -634,7 +634,14 @@ function Draw() {
 
 	ctx.fillStyle = 'white';
 	ctx.strokeStyle = 'blue';
-
+	UI.messages.length=0;
+	UI.hoverUpgrades();
+	for(let i=0;i<UI.messages.length;i++)
+	{
+		ctx.fillText(UI.messages[i],mousePos[0],mousePos[1]+30*i);
+		ctx.strokeText(UI.messages[i],mousePos[0],mousePos[1]+30*i);
+	}
+	
 	for (let i = 0; i < UI.numberOfTowerTypes; i++) {
 		ctx.fillText("$" + UI.towerMenuCosts[i], UI.buttonArrayCoords[i][0] - UI.buttonSize / 2, UI.buttonArrayCoords[i][1] + UI.buttonSize / 2);
 		ctx.strokeText("$" + UI.towerMenuCosts[i], UI.buttonArrayCoords[i][0] - UI.buttonSize / 2, UI.buttonArrayCoords[i][1] + UI.buttonSize / 2);
