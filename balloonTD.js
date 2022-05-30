@@ -152,6 +152,7 @@ function closeButton(UIButton){ //not sure if this is necessary
 class MapCheckpoints {
 	constructor() {
 		this.checkPoints = [
+
 			[4, 398],
 			[144, 429],
 			[348, 459],
@@ -346,10 +347,20 @@ function Init() {
 	mapHeight = canvas.height;
 	canvas.onmousedown = Click;
 	canvas.onmousemove = MouseMove;
-
+	canvas.onkeydown = KeyDown;
 
 	gameState = 1;
 	setInterval(() => { Update(); Draw(); }, 16);
+}
+
+function KeyDown(e) { //broken
+	console.log("key pressed");
+	switch (e) {
+		case 'a': {
+			let newWave = new enemyWave();
+			newWave.level1.Spawn();
+		}
+	}
 }
 
 
@@ -506,6 +517,7 @@ function Update() {
 		enemiesSpawned++;
 	}
 
+
 	for (let i = 0; i < enemies.length; i++) {
 		enemies[i].Update();
 		if (enemies[i].isDead) {
@@ -606,7 +618,7 @@ function Draw() {
 			button = UI.upgradeButtons[i];
 			drawUIButton(button);
 			ctx.fillText("$" + selectedTower.upgradePrice[button.buttonTypeType], button.pos[0] - button.width / 2, button.pos[1] + button.height / 2);
-	
+
 		}
 	}
 
