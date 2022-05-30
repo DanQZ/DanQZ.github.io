@@ -596,9 +596,13 @@ function Draw() {
 
 	if (upgradeMenuOpened) { //draw upgrade menu buttons
 		for (let i = 0; i < UI.upgradeButtons.length; i++) {
-			drawUIButton(UI.upgradeButtons[i]);
+			button = UI.upgradeButtons[i];
+			drawUIButton(button);
+			ctx.fillText("$" + selectedTower.upgradePrice[button.buttonTypeType], button.pos[0] - button.width / 2, button.pos[1] + button.height / 2);
+	
 		}
 	}
+	
 	//draw tower menu
 	for (let i = 0; i < UI.numberOfTowerTypes; i++) {
 		let background = UI.towerMenuButtons[i];
