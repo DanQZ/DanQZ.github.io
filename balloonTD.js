@@ -76,6 +76,13 @@ May 4 v0.0.9 //UI.js + mapMaker
 -Upgrades now cost money (no scaling added yet)
 -Backend: over 400 lines of UI related code moved out of balloonTD.js to UI.js
 -Fixed another fucking bouncing boomerang bug
+
+
+in progress
+-enemy spawn class
+-added upgrade prices
+May 29
+
 */
 let gameState;
 
@@ -602,7 +609,7 @@ function Draw() {
 	
 		}
 	}
-	
+
 	//draw tower menu
 	for (let i = 0; i < UI.numberOfTowerTypes; i++) {
 		let background = UI.towerMenuButtons[i];

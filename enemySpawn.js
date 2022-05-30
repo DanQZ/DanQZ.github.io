@@ -23,7 +23,7 @@ class enemySpawn {
         for (let i = 0; i < this.enemyArray.length; i++) {
             if (frame % this.enemyArray[i][4] == 0) {
                 enemiesSpawned++;
-                console.log("hi");
+                console.log("hi I'm a new enemy");
                 enemies.push(new Enemy(this.enemyArray[i][0] + frame, this.enemyArray[i][1], this.enemyArray[i][2], this.enemyArray[i][3]));
             }
         }
